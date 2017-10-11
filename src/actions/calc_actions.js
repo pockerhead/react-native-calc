@@ -52,5 +52,22 @@ export const CLEAR = ()=>{
         }
     }
 }
+export const REPL_OP = (operator)=>{
+    return{
+        type:'REPL_OP',
+        payload:{
+            operator:operator
+        }
+    }
 
+}
+export const CNG_ZNK = (num)=>{
+    return{
+        type:'CNG_ZNK',
+        payload:{
+            num:num
+        }
+    }
+
+}
 

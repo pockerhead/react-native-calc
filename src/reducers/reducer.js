@@ -14,12 +14,12 @@ export default function (state = initialState, action) {
                 result: action.payload.sum1 - action.payload.sum2
             }
             break;
-            case 'INC':
+        case 'INC':
             return {
                 result: action.payload.sum1 * action.payload.sum2
             }
             break;
-            case 'DIV':
+        case 'DIV':
             return {
                 result: action.payload.sum1 / action.payload.sum2
             }
@@ -32,6 +32,34 @@ export default function (state = initialState, action) {
             break;
         case 'CLEAR':
             return {result: action.payload.input}
+            break;
+        case 'REPL_OP':
+            return {
+                result: state
+                    .result
+                    .replace(state.result.match(/\D?\d+\.?\d*([\+\-\*\/])/)[1], action.payload.operator)
+            }
+            break;
+        case 'CNG_ZNK':
+            switch (action.payload.num) {
+                case 1:
+                    return {
+                        result: state
+                            .result
+                            .replace(state.result.match(/(\D?\d+\.?\d*)/)[1], '-' + state.result)
+                    }
+                    break;
+                case 2:
+                return {
+                    result: state
+                        .result
+                        .replace(/.*/,state.result.match(/(\D?\d+\.?\d*[\+\-\*\/])/)[1]+ '-' + state.result.match(/\D?\d+\.?\d*[\+\-\*\/](\D?\d*\.?\d*)/)[1])
+                }
+                    break;
+
+                default:
+                    break;
+            }
             break;
 
         default:

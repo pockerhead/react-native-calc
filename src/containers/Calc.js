@@ -32,6 +32,40 @@ class Calc extends Component < {} > {
             .CalcActions
             .INPUT()
     }
+    replaceoperator(operator) {
+        if (this.props.result.toString().match(/\D?\d+\.?\d*([\+\-\*\/])\D?\d*\.?\d*/) != null) {
+            this
+                .props
+                .CalcActions
+                .REPL_OP(operator)
+        } else {
+            if (this.props.result.toString().match(/\D?(\d+)\.?\d*/) != null) {
+                this
+                    .props
+                    .CalcActions
+                    .INPUT(operator)
+            } else {
+                return false;
+            }
+        }
+    }
+    changeznak() {
+        if (this.props.result.toString().match(/\D?\d+\.?\d*[\+\-\*\/](\D?\d*\.?\d*)/) != null) {
+            this
+                .props
+                .CalcActions
+                .CNG_ZNK(2);
+        } else {
+            if (this.props.result.toString().match(/(\D?\d+\.?\d*)/) != null) {
+                this
+                    .props
+                    .CalcActions
+                    .CNG_ZNK(1);
+            } else {
+                return false;
+            }
+        }
+    }
     make_magic() {
         try {
             var x = this
@@ -104,6 +138,14 @@ class Calc extends Component < {} > {
                         style={styles.calc_button}>
                         <Text style={styles.calc_button_text}>C</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={this
+                        .changeznak
+                        .bind(this)}
+                        style={styles.calc_button}>
+                        <Text style={styles.calc_button_text}>'-x'</Text>
+                    </TouchableOpacity>
+
                 </View>
                 <View style={styles.calc_container}>
                     <TouchableOpacity onPress={() => INPUT(1)} style={styles.calc_button}>
@@ -115,7 +157,11 @@ class Calc extends Component < {} > {
                     <TouchableOpacity onPress={() => INPUT(3)} style={styles.calc_button}>
                         <Text style={styles.calc_button_text}>3</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => INPUT('+')} style={styles.calc_button}>
+                    <TouchableOpacity
+                        onPress={this
+                        .replaceoperator
+                        .bind(this, '+')}
+                        style={styles.calc_button}>
                         <Text style={styles.calc_button_text}>+</Text>
                     </TouchableOpacity>
                 </View>
@@ -129,7 +175,11 @@ class Calc extends Component < {} > {
                     <TouchableOpacity onPress={() => INPUT(6)} style={styles.calc_button}>
                         <Text style={styles.calc_button_text}>6</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => INPUT('-')} style={styles.calc_button}>
+                    <TouchableOpacity
+                        onPress={this
+                        .replaceoperator
+                        .bind(this, '-')}
+                        style={styles.calc_button}>
                         <Text style={styles.calc_button_text}>-</Text>
                     </TouchableOpacity>
                 </View>
@@ -143,7 +193,11 @@ class Calc extends Component < {} > {
                     <TouchableOpacity onPress={() => INPUT(9)} style={styles.calc_button}>
                         <Text style={styles.calc_button_text}>9</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => INPUT('*')} style={styles.calc_button}>
+                    <TouchableOpacity
+                        onPress={this
+                        .replaceoperator
+                        .bind(this, '*')}
+                        style={styles.calc_button}>
                         <Text style={styles.calc_button_text}>*</Text>
                     </TouchableOpacity>
                 </View>
@@ -161,7 +215,11 @@ class Calc extends Component < {} > {
                         style={styles.calc_button}>
                         <Text style={styles.calc_button_text}>=</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => INPUT('/')} style={styles.calc_button}>
+                    <TouchableOpacity
+                        onPress={this
+                        .replaceoperator
+                        .bind(this, '/')}
+                        style={styles.calc_button}>
                         <Text style={styles.calc_button_text}>/</Text>
                     </TouchableOpacity>
                 </View>
