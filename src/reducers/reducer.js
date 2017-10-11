@@ -36,8 +36,8 @@ export default function (state = initialState, action) {
         case 'REPL_OP':
             return {
                 result: state
-                    .result
-                    .replace(state.result.match(/\D?\d+\.?\d*([\+\-\*\/])/)[1], action.payload.operator)
+                    .result.toString()
+                    .replace(state.result.toString().match(/\D?\d+\.?\d*([\+\-\*\/])/)[1], action.payload.operator)
             }
             break;
         case 'CNG_ZNK':
@@ -45,15 +45,15 @@ export default function (state = initialState, action) {
                 case 1:
                     return {
                         result: state
-                            .result
-                            .replace(state.result.match(/(\D?\d+\.?\d*)/)[1], '-' + state.result)
+                            .result.toString()
+                            .replace(state.result.toString().match(/(\D?\d+\.?\d*)/)[1], '-' + state.result)
                     }
                     break;
                 case 2:
                 return {
                     result: state
-                        .result
-                        .replace(/.*/,state.result.match(/(\D?\d+\.?\d*[\+\-\*\/])/)[1]+ '-' + state.result.match(/\D?\d+\.?\d*[\+\-\*\/](\D?\d*\.?\d*)/)[1])
+                        .result.toString()
+                        .replace(/.*/,state.result.toString().match(/(\D?\d+\.?\d*[\+\-\*\/])/)[1]+ '-' + state.result.match(/\D?\d+\.?\d*[\+\-\*\/](\D?\d*\.?\d*)/)[1])
                 }
                     break;
 

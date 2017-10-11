@@ -238,7 +238,8 @@ const styles = StyleSheet.create({
     },
     result_text: {
         color: 'black',
-        fontSize: 20,
+        height:70,
+        fontSize: 30,
         textAlign: 'center',
         margin: 10
     },
